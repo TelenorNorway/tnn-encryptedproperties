@@ -2,8 +2,7 @@ extern crate base64;
 extern crate openssl;
 
 use anyhow::{anyhow, Result};
-use base64::Engine;
-use base64::engine::general_purpose;
+use base64::{Engine, engine::general_purpose};
 use openssl::symm::{Cipher, Crypter, Mode};
 use thiserror::Error;
 
