@@ -4,41 +4,25 @@ extern crate openssl;
 use anyhow::{anyhow, Result};
 use base64::{Engine, engine::general_purpose};
 use openssl::symm::{Cipher, Crypter, Mode};
-use thiserror::Error;
 
-#[derive(Error, Debug)]
-enum DecrypterError {
-    #[error("Master password cannot be empty")]
-    EmptyPassword,
-    #[error("Failed to decode base64")]
-    Base64DecodeError,
-    #[error("Invalid key length")]
-    InvalidKeyLength,
-    #[error("OpenSSL error: {0}")]
-    OpenSSLError(#[from] openssl::error::ErrorStack),
-    #[error("UTF-8 conversion error: {0}")]
-    Utf8Error(#[from] std::string::FromUtf8Error),
-    #[error("Base64 decode error: {0}")]
-    Base64Error(#[from] base64::DecodeError),
-}
+use crate::encrypted_properties_error::EncryptedPropertiesError;
 
-#[derive(Debug)]
 pub struct EncryptedProperties {
     key: Vec<u8>,
 }
 
 impl EncryptedProperties {
-    pub fn new(master_password: &str) -> Result<EncryptedProperties> {
+    pub fn new(master_password: &str) -> Result<Self> {
         if master_password.is_empty() {
-            return Err(anyhow!(DecrypterError::EmptyPassword));
+            return Err(anyhow!(EncryptedPropertiesError::EmptyPassword));
         }
 
         let master_key = general_purpose::STANDARD.decode(master_password).map_err(|_|
-            DecrypterError::Base64DecodeError)?;
+            EncryptedPropertiesError::Base64DecodeError)?;
         let key_length = master_key.len() * 8;
 
         if key_length != 128 && key_length != 192 && key_length != 256 {
-            return Err(anyhow!(DecrypterError::InvalidKeyLength));
+            return Err(anyhow!(EncryptedPropertiesError::InvalidKeyLength));
         }
 
         Ok(EncryptedProperties { key: master_key })
