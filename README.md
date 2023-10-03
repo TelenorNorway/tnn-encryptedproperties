@@ -4,11 +4,22 @@
 [![GitHub stars](https://img.shields.io/github/stars/TelenorNorway/tnn-encryptedproperties.svg?style=for-the-badge)](https://github.com/TelenorNorway/tnn-encryptedproperties/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/TelenorNorway/tnn-encryptedproperties.svg?style=for-the-badge)](https://github.com/TelenorNorway/tnn-encryptedproperties/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/TelenorNorway/tnn-encryptedproperties.svg?style=for-the-badge)](https://github.com/TelenorNorway/tnn-encryptedproperties/pulls)
-[![GitHub forks](https://img.shields.io/github/forks/TelenorNorway/tnn-encryptedproperties.svg?style=for-the-badge)](https://github.com/TelenorNorway/tnn-encryptedproperties/network/members)
-[![GitHub last commit](https://img.shields.io/github/last-commit/TelenorNorway/tnn-encryptedproperties.svg?style=for-the-badge)](https://github.com/TelenorNorway/tnn-encryptedproperties/commits/main)
 
 TNN Encrypted Properties is an extension developed by Telenor Norway, aimed at providing a secure method of handling
 properties by enabling encryption and decryption using a master password. This extension is designed to integrate
 seamlessly with TNN ecosystem for creating CLI tools, aiding in the secure management of sensitive data.
+
+### Usage
+#### Encrypting a String
+To encrypt a plain text string using your master password, use the following command:
+```bash
+tnn ep encrypt <MASTER_PASSWORD> <STRING>
+```
+
+#### Decrypting an Encrypted String
+To decrypt an encrypted string back to its original form using the master password, execute:
+```bash
+tnn ep decrypt <MASTER_PASSWORD> <ENCRYPTED_STRING>
+```
 
 **Repository**: https://github.com/TelenorNorway/tnn
