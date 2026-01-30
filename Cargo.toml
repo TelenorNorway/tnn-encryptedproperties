@@ -1,16 +1,22 @@
 [package]
-name = "tnn-encryptedproperties"
-version = "0.1.0"
+name = "tnn"
+version = "0.2.0"
 edition = "2021"
-author = ["Michael Herland Valen"]
+authors = ["Michael Herland Valen"]
+description = "A CLI tool for encrypting and decrypting strings using AES-256-CBC"
+license = "MIT"
 
 [lib]
-crate-type = ["cdylib"]
+name = "tnn"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tnn"
+path = "src/main.rs"
 
 [dependencies]
-openssl = "0.10.57"
-base64 = "0.21.4"
-thiserror = "1.0.49"
-anyhow = "1.0.75"
-tnn = "0.1.2"
-clap = { version = "4.4.6", features = ["derive"] }
+openssl = "0.10.70"
+base64 = "0.22.1"
+thiserror = "2.0.9"
+anyhow = "1.0.95"
+clap = { version = "4.5.23", features = ["derive"] }
